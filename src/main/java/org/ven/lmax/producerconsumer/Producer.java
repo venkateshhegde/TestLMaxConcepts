@@ -19,6 +19,6 @@ public class Producer {
         ValueEvent valueEvent = bus.get(seq);
         valueEvent.setValue(message);
         bus.publish(seq);
-        logger.info("Produced: " + seq + " | " + message);
+        logger.info("Producer: " + seq + " | " + message);
     }
 }

@@ -10,7 +10,6 @@ public class Consumer implements EventHandler<ValueEvent>{
 
     Logger logger = LoggerFactory.getLogger(Consumer.class);
     public void onEvent(final ValueEvent event, final long sequence, final boolean endOfBatch) throws Exception {
-        logger.info("Sequence: " + sequence);
-        logger.info("ValueEvent: " + event.getValue());
+        logger.info("Sequence: " + sequence + " ValueEvent: " + event.getValue());
     }
 }

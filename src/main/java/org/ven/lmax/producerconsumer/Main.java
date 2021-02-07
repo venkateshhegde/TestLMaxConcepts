@@ -22,6 +22,8 @@ public class Main {
             prod.publish(String.format("%5d", i));
         }
 
+        disruptor.shutdown();
+        exec.shutdown();
 
     }
 }

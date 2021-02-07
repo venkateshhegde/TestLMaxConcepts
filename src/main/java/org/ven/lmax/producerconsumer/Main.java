@@ -33,7 +33,7 @@ public class Main {
                         logger.info("Creating Thread..." + count);
                         return new Thread(runnable, "ConsumerThread" + (count++));
                     }
-                });
+                }, ProducerType.MULTI, new SleepingWaitStrategy());
 
         disruptor.handleEventsWith(cons);
 

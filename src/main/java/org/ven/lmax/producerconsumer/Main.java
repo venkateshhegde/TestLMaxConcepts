@@ -3,6 +3,7 @@ package org.ven.lmax.producerconsumer;
 import com.lmax.disruptor.*;
 import com.lmax.disruptor.dsl.Disruptor;
 import com.lmax.disruptor.dsl.ProducerType;
+import com.lmax.disruptor.util.DaemonThreadFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.ven.lmax.producerconsumer.events.ValueEvent;
@@ -24,16 +25,7 @@ public class Main {
         }
         final Disruptor<ValueEvent> disruptor = new Disruptor<ValueEvent>(ValueEvent.EVENT_FACTORY,
                 16,
-                new ThreadFactory() {
-
-                    int count = 0;
-
-                    @Override
-                    public Thread newThread(Runnable runnable) {
-                        logger.info("Creating Thread..." + count);
-                        return new Thread(runnable, "ConsumerThread" + (count++));
-                    }
-                }, ProducerType.MULTI, new SleepingWaitStrategy());
+                DaemonThreadFactory.INSTANCE, ProducerType.MULTI, new SleepingWaitStrategy());
 
         disruptor.handleEventsWith(cons);
 
